@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+    </head>
+    <body>
+        <nav>
+            <ul>
+                <li><a href="{{ path('home') }}">utilisateurs</a></li>
+                <li><a href="{{ path('tache') }}">taches</a></li>
+            </ul>
+        </nav>
+
+        {% for type, messages in app.flashes %}
+            {% for message in messages %}
+                <p>{{ type }} : {{ message }}</p>
+            {% endfor %}
+        {% endfor %}
+
+        {% block body %}{% endblock %}
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

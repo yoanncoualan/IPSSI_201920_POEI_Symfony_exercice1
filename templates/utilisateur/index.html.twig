@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello UtilisateurController!{% endblock %}
+
+{% block body %}
+
+    {% if utilisateurs is not empty %}
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th>Email</th>
+                    <th>Date inscription</th>
+                    <th>Tâches</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for utilisateur in utilisateurs %}
+                    <tr>
+                        <td>{{ utilisateur.nom }}</td>
+                        <td>{{ utilisateur.prenom }}</td>
+                        <td>{{ utilisateur.email }}</td>
+                        <td>{{ utilisateur.inscription|date('d/m/Y à H:i:s') }}</td>
+                        <td>{{ utilisateur.taches|length }}</td>
+                        <td>
+                            <a href="{{ path('utilisateur_edit', {'id': utilisateur.id}) }}">Edit</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>Il n'y a aucun utilisateur</p>
+    {% endif %}
+
+    <h2>Ajouter un utilisateur</h2>
+    {{ form(ajout) }}
+
+{% endblock %}

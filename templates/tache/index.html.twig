@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello TacheController!{% endblock %}
+
+{% block body %}
+    <h1>liste des taches</h1>
+    {% if taches is not empty %}
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Deadline</th>
+                    <th>Utilisateur</th>
+                    <th>Etat</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for tache in taches %}
+                    <tr>
+                        <td>{{ tache.nom }}</td>
+                        <td>{{ tache.deadline|date('d/m:Y à H:i:s') }}</td>
+                        <td>{{ tache.utilisateur }}</td>
+                        <td>
+                            {% if tache.etat == false %}
+                                en cours
+                            {% else %}
+                                terminée
+                            {% endif %}
+                        </td>
+                        <td><a href="{{path('edit_tache', {'id': tache.id})}}">Edit</a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>Il n'y a aucune tâche</p>
+    {% endif %}
+
+    <h2>Ajouter une tâche</h2>
+    {{ form(ajout) }}
+{% endblock %}

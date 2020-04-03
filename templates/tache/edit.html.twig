@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<h1>{{tache.nom}}</h1>
+	<p>{{tache.deadline|date('d/m/Y à H:i:s')}}</p>
+	<p>
+		{% if tache.etat == 0 %}
+			en cours
+		{% else %}
+			terminée
+		{% endif %}
+	</p>
+	<p>{{tache.utilisateur}}</p>
+
+	<h2>Modifier la tâche</h2>
+	{{ form(edit) }}
+{% endblock %}
